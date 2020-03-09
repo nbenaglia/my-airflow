@@ -113,7 +113,7 @@ You can document your task using the attributes `doc_md` (markdown),
 rendered in the UI's Task Instance Details page.
 ![img](http://montcs.bloomu.edu/~bobmon/Semesters/2012-01/491/import%20soul.png)
 """
-````
+```
 
 ---
 
@@ -132,13 +132,60 @@ task_1 is upstream of task_2, and conversely task_2 is downstream of task_1.
 
 When a DAG Run is created, task_1 will start running and task_2 waits for task_1 to complete successfully before it may start.
 
+bitshift operators rather than set_upstream() and set_downstream() are the recommended way to set relationship.
+
+```airflow
+op1 >> op2
+op1.set_downstream(op2)
+
+op2 << op1
+op2.set_upstream(op1)
+
+op1 >> [op2, op3] >> op4
+op1.set_downstream([op2, op3])
+```
+
 ---
 
 ## Task lifecycle
 
 A task goes through various stages from start to completion.
 
-.center[![dag](./images/task_lifecycle_diagram.png)]
+.left[![dag](./images/task_lifecycle_diagram.png)]
+
+---
+
+## Operators
+
+While DAGs describe how to run a workflow, `Operators` determine what actually gets done by a task.
+
+An operator describes a single task in a workflow.
+
+Operators are usually (but not always) atomic, meaning they can stand on their own and don’t need to share resources with any other operators. 
+
+In general, if two operators need to share information, like a filename or small amount of data, you should consider combining them into a single operator. 
+
+If it absolutely can’t be avoided, Airflow does have a feature for operator cross-communication called `XCom`.
+
+---
+
+## Operators (2)
+
+Airflow provides operators for many common tasks, including:
+
+- `BashOperator` - executes a bash command
+
+- `PythonOperator` - calls an arbitrary Python function
+
+- `EmailOperator` - sends an email
+
+- `SimpleHttpOperator` - sends an HTTP request
+
+- `MySqlOperator`, `SqliteOperator`, `PostgresOperator`, `MsSqlOperator`, `OracleOperator`, `JdbcOperator`, etc. - executes a SQL command
+
+- `Sensor` - an Operator that waits (polls) for a certain time, file, database row, S3 key, etc…
+
+In addition to these basic building blocks, there are many more specific operators: `DockerOperator`, `HiveOperator`, `S3FileTransformOperator`, `PrestoToMySqlTransfer`, `SlackAPIOperator`...
 
 ---
 
