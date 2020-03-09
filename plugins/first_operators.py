@@ -17,6 +17,7 @@ class MyFirstOperator(BaseOperator):
     def execute(self, context):
         log.info("Hello World!")
         log.info('operator_param: %s', self.operator_param)
+        # from IPython import embed; embed()
         task_instance = context['task_instance']
         sensors_minute = task_instance.xcom_pull('my_sensor_task', key='sensors_minute')
         log.info('Valid minute as determined by sensor: %s', sensors_minute)
