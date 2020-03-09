@@ -117,8 +117,35 @@ rendered in the UI's Task Instance Details page.
 
 ---
 
+## Relations betweek tasks
+
+Consider the following DAG with two tasks. Each task is a node in our DAG, and there is a dependency from task_1 to task_2:
+
+```airflow
+with DAG('my_dag', start_date=datetime(2016, 1, 1)) as dag:
+    task_1 = DummyOperator('task_1')
+    task_2 = DummyOperator('task_2')
+    task_1 >> task_2 # Define dependencies
+```
+
+task_1 is upstream of task_2, and conversely task_2 is downstream of task_1.
+
+When a DAG Run is created, task_1 will start running and task_2 waits for task_1 to complete successfully before it may start.
+
+---
+
+## Task lifecycle
+
+A task goes through various stages from start to completion.
+
+.center[![dag](./images/task_lifecycle_diagram.png)]
+
+---
+
 ## References
 
 - <https://airflow.apache.org/docs/stable/>
 
 - <https://airflow.readthedocs.io>
+
+---
