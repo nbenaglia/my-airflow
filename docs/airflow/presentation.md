@@ -77,9 +77,9 @@ dag = DAG(
 )
 ```
 
-- tasks: these are generated when instantiating operator objects.
+- tasks: these are generated when instantiating operator objects. Each task is an implementation of an Operator, for example a PythonOperator to execute some Python code, or a BashOperator to run a Bash command.
 
-An object instantiated from an operator is called a constructor. The first argument task_id acts as a unique identifier for the task.
+The first argument task_id (passed to the operator constructor) acts as a unique identifier for the task.
 
 ```airflow
 t1 = BashOperator(
