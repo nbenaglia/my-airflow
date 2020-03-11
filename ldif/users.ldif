@@ -1,0 +1,55 @@
+dn: dc=example,dc=org
+objectclass: top
+objectclass: organizationalUnit
+ou: People
+
+dn: ou=RealmRoles,dc=example,dc=org
+objectclass: top
+objectclass: organizationalUnit
+ou: RealmRoles
+
+dn: ou=FinanceRoles,dc=example,dc=org
+objectclass: top
+objectclass: organizationalUnit
+ou: FinanceRoles
+
+dn: uid=nbenaglia,dc=example,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+uid: nbenaglia
+cn: Nicola
+sn: Benaglia
+mail: nbenaglia@example.org
+userPassword: password
+
+dn: uid=jwick,dc=example,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+uid: jwick
+cn: John
+sn: Wick
+mail: jwick@example.org
+userPassword: password
+
+dn: cn=ldap-user,ou=RealmRoles,dc=example,dc=org
+objectclass: top
+objectclass: groupOfNames
+cn: ldap-user
+member: uid=nbenaglia,dc=example,dc=org
+member: uid=jwick,dc=example,dc=org
+
+dn: cn=ldap-admin,ou=RealmRoles,dc=example,dc=org
+objectclass: top
+objectclass: groupOfNames
+cn: ldap-admin
+member: uid=nbenaglia,dc=example,dc=org
+
+dn: cn=accountant,ou=FinanceRoles,dc=example,dc=org
+objectclass: top
+objectclass: groupOfNames
+cn: accountant
+member: uid=jwick,dc=example,dc=org
