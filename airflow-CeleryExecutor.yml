@@ -42,11 +42,12 @@ services:
             - POSTGRES_PASSWORD=airflow
             - POSTGRES_DB=airflow
             - REDIS_PASSWORD=redispass
-            - AIRFLOW__CELERY__RESULT_BACKEND=db+postgresql://airflow:airflow@postgres:5432/airflow
-            - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
         volumes:
             - $GITHUB_HOME/airflow/airflow/example_dags:/usr/local/airflow/dags
             - ./plugins:/usr/local/airflow/plugins
+            - ./config/airflow.cfg:/usr/local/airflow/airflow.cfg
+            - ./config/init.sh:/usr/local/airflow/init.sh
+            - ./config/webserver_config.py:/usr/local/airflow/webserver_config.py
         ports:
             - "8080:8080"
         command: webserver
@@ -86,8 +87,7 @@ services:
             - POSTGRES_PASSWORD=airflow
             - POSTGRES_DB=airflow
             - REDIS_PASSWORD=redispass
-            - AIRFLOW__CELERY__RESULT_BACKEND=db+postgresql://airflow:airflow@postgres:5432/airflow
-            - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+            - ./config/airflow.cfg:/usr/local/airflow/airflow.cfg
         command: scheduler
 
     worker:
@@ -107,6 +107,5 @@ services:
             - POSTGRES_PASSWORD=airflow
             - POSTGRES_DB=airflow
             - REDIS_PASSWORD=redispass
-            - AIRFLOW__CELERY__RESULT_BACKEND=db+postgresql://airflow:airflow@postgres:5432/airflow
-            - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+            - ./config/airflow.cfg:/usr/local/airflow/airflow.cfg
         command: worker

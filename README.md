@@ -7,3 +7,5 @@
 2. Populate LDAP with some data:
 
   `ldapadd -Z -H ldap://localhost:3890 -D "cn=admin,dc=example,dc=org" -w admin -f ./ldif/users.ldif`
+
+3. Run init.sh
