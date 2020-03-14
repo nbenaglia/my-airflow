@@ -4,6 +4,8 @@
 
 Airflow is a platform to programmatically author, schedule and monitor workflows.
 
+<p align="center"><img src="./images/airflow.png" style="max-width:50%;" /></p>
+
 ---
 
 ## DAG concept
@@ -70,14 +72,14 @@ default_args = {
 
 ```airflow
 dag = DAG(
-    'tutorial',
+    'tutorial', # dag_id
     default_args=default_args,
     description='A simple tutorial DAG',
     schedule_interval=timedelta(days=1),
 )
 ```
 
-- tasks: these are generated when instantiating operator objects. Each task is an implementation of an Operator, for example a PythonOperator to execute some Python code, or a BashOperator to run a Bash command.
+- tasks: these are generated when instantiating operator objects. Each task is an implementation of an Operator (PythonOperator, BashOperator, ...)
 
 The first argument task_id (passed to the operator constructor) acts as a unique identifier for the task.
 
@@ -85,15 +87,14 @@ The first argument task_id (passed to the operator constructor) acts as a unique
 t1 = BashOperator(
   task_id='print_date',
   bash_command='date',
-  dag=dag,
+  dag=dag
 )
-
 t2 = BashOperator(
     task_id='sleep',
     depends_on_past=False,
     bash_command='sleep 5',
     retries=3,
-    dag=dag,
+    dag=dag
 )
 ```
 
@@ -132,11 +133,11 @@ task_1 is upstream of task_2, and conversely task_2 is downstream of task_1.
 
 When a DAG Run is created, task_1 will start running and task_2 waits for task_1 to complete successfully before it may start.
 
-bitshift operators rather than set_upstream() and set_downstream() are the recommended way to set relationship.
+bitshift operators are the recommended way to set relationship.
 
 ```airflow
-op1 >> op2
-op1.set_downstream(op2)
+op1 >> op2                 # recommended
+op1.set_downstream(op2)    # not recommended
 
 op2 << op1
 op2.set_upstream(op1)
@@ -151,7 +152,7 @@ op1.set_downstream([op2, op3])
 
 A task goes through various stages from start to completion.
 
-.left[![dag](./images/task_lifecycle_diagram.png)]
+<p align="center"><img src="./images/task_lifecycle_diagram.png" style="max-width:100%;" /></p>
 
 ---
 
@@ -186,6 +187,65 @@ Airflow provides operators for many common tasks, including:
 - `Sensor` - an Operator that waits (polls) for a certain time, file, database row, S3 key, etc…
 
 In addition to these basic building blocks, there are many more specific operators: `DockerOperator`, `HiveOperator`, `S3FileTransformOperator`, `PrestoToMySqlTransfer`, `SlackAPIOperator`...
+
+---
+
+## Plugins
+
+You integrate external features to its core by simply dropping files in your `$AIRFLOW_HOME/plugins` folder.
+
+Plugins can be used as an easy way to write, share and activate new sets of features
+and customize an Airflow installation to reflect your software ecosystem.
+
+---
+
+## Plugins (2)
+
+Airflow has many components that can be reused when building an application:
+
+- A web server you can use to render your views
+
+- A metadata database to store your models
+
+- Access to your databases, and knowledge of how to connect to them
+
+- An array of workers that your application can push workload to
+
+- Basic charting capabilities, underlying libraries and abstractions
+
+---
+
+## Plugin creation
+
+To create a plugin you will need to derive the
+`airflow.plugins_manager.AirflowPlugin`
+class and reference the objects you want to plug into Airflow.
+
+The class you need to derive looks like:
+
+```airflow
+class AirflowPlugin(object):
+    name = None
+    operators = []
+    sensors = []
+    hooks = []
+    executors = []
+    macros = []
+    admin_views = []
+    flask_blueprints = []
+    menu_links = []
+    appbuilder_views = []
+    appbuilder_menu_items = []
+
+    # A list of global operator extra links that can redirect users to
+    # external systems. These extra links will be available on the
+    # task page in the form of buttons.
+    global_operator_extra_links = []
+
+    # A list of operator extra links to override or add operator links
+    # to existing Airflow Operators.
+    operator_extra_links = []
+```
 
 ---
 
