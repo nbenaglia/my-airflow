@@ -168,6 +168,14 @@ In general, if two operators need to share information, like a filename or small
 
 If it absolutely can’t be avoided, Airflow does have a feature for operator cross-communication called `XCom`.
 
+There are 3 main types of operators:
+
+- Operators that performs an action, or tell another system to perform an action
+
+- Transfer operators move data from one system to another
+
+- Sensors are a certain type of operator that will keep running until a certain criterion is met.
+
 ---
 
 ## Operators (2)
