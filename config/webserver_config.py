@@ -32,6 +32,8 @@ SQLALCHEMY_DATABASE_URI = conf.get('core', 'SQL_ALCHEMY_CONN')
 # Flask-WTF flag for CSRF
 CSRF_ENABLED = True
 
+FAB_API_SWAGGER_UI = True  # See swagger at /swaggerview/v1
+
 # ----------------------------------------------------
 # AUTHENTICATION CONFIG
 # ----------------------------------------------------

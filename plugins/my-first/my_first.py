@@ -29,10 +29,11 @@ def plugin_macro():
 
 # Creating a flask blueprint to integrate the templates and static folder
 bp = Blueprint(
-    "test_plugin", __name__,
+    "test_plugin", 
+    __name__,
     template_folder='templates', # registers airflow/plugins/templates as a Jinja template folder
     static_folder='static',
-    static_url_path='/static/test_plugin')
+    static_url_path='/static/my-first')
 
 # Creating a flask appbuilder BaseView
 class TestAppBuilderBaseView(AppBuilderBaseView):
@@ -40,7 +41,7 @@ class TestAppBuilderBaseView(AppBuilderBaseView):
 
     @expose("/")
     def myview(self):
-        return self.render("test_plugin/test.html", content="Hello galaxy!")
+        return self.render_template("test.html", content="I am your plugin inserted in the current layout!")
 
 v_appbuilder_view = TestAppBuilderBaseView()
 v_appbuilder_package = {"name": "Test View",
@@ -63,7 +64,7 @@ class GoogleLink(BaseOperatorLink):
 
 # Defining the plugin class
 class AirflowTestPlugin(AirflowPlugin):
-    name = "test_plugin"
+    name = "my-first"
     operators = [PluginOperator]
     sensors = [PluginSensorOperator]
     hooks = [PluginHook]
