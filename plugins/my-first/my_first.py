@@ -54,8 +54,7 @@ appbuilder_mitem = {"name": "Google",
                     "category_icon": "fa-th",
                     "href": "https://www.google.com"}
 
-# A global operator extra link that redirect you to
-# task logs stored in S3
+# A global operator extra link that redirect you to google
 class GoogleLink(BaseOperatorLink):
     name = "Google"
 
