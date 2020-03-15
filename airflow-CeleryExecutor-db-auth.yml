@@ -4,18 +4,6 @@ services:
         image: 'redis:5.0.5'
         command: redis-server --requirepass redispass
 
-    ldap:
-        image: osixia/openldap:1.3.0
-        environment:
-            KEEP_EXISTING_CONFIG: "true"
-            LDAP_ORGANISATION: "My Example Organization"
-            LDAP_DOMAIN: "example.org"
-            LDAP_ADMIN_PASSWORD: "admin"
-            LDAP_CONFIG_PASSWORD: "config"
-        ports:
-            - "3890:389" 
-            - "6360:636"
-
     postgres:
         image: postgres:9.6
         environment:
@@ -47,7 +35,7 @@ services:
             - ./plugins:/usr/local/airflow/plugins
             - ./config/airflow.cfg:/usr/local/airflow/airflow.cfg
             - ./config/init.sh:/usr/local/airflow/init.sh
-            - ./config/webserver_config.py:/usr/local/airflow/webserver_config.py
+            - ./config/webserver_config_db.py:/usr/local/airflow/webserver_config.py
         ports:
             - "8080:8080"
         command: webserver
