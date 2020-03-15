@@ -48,6 +48,7 @@ objectclass: top
 objectclass: groupOfNames
 cn: ldap-admin
 member: uid=nbenaglia,dc=example,dc=org
+member: uid=admin,dc=example,dc=org
 
 dn: cn=accountant,ou=FinanceRoles,dc=example,dc=org
 changetype: add
