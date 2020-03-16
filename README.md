@@ -27,4 +27,6 @@ Image [osixia/openldap](https://github.com/osixia/docker-openldap) is going to b
 
   `ldapadd -Z -H ldap://localhost:3890 -D "cn=admin,dc=example,dc=org" -w admin -f ./ldif/users.ldif`
 
+  Test with: 
   
+  `ldapsearch -x -H ldap://localhost:3890 -b dc=example,dc=org -D "cn=admin,dc=example,dc=org" -w admin -s sub "(objectclass=*)"`

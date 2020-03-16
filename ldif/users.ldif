@@ -20,7 +20,8 @@ uid: nbenaglia
 cn: Nicola
 sn: Benaglia
 mail: nbenaglia@example.org
-userPassword: password
+userPassword: {SHA}W6ph5Mm5Pz8GgiULbPgzG37mj9g=
+# userPassword has value password (SHA encoded)
 
 dn: uid=jwick,dc=example,dc=org
 changetype: add
@@ -32,7 +33,8 @@ uid: jwick
 cn: John
 sn: Wick
 mail: jwick@example.org
-userPassword: password
+userPassword: {SHA}W6ph5Mm5Pz8GgiULbPgzG37mj9g=
+# userPassword has value password (SHA encoded)
 
 dn: cn=ldap-user,ou=RealmRoles,dc=example,dc=org
 changetype: add
@@ -48,7 +50,7 @@ objectclass: top
 objectclass: groupOfNames
 cn: ldap-admin
 member: uid=nbenaglia,dc=example,dc=org
-member: uid=admin,dc=example,dc=org
+member: cn=admin,dc=example,dc=org
 
 dn: cn=accountant,ou=FinanceRoles,dc=example,dc=org
 changetype: add

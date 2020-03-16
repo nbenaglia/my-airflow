@@ -50,7 +50,7 @@ FAB_API_SWAGGER_UI = True  # See swagger at /swaggerview/v1
 AUTH_TYPE = AUTH_LDAP
 
 # Uncomment to setup Full admin role name
-# AUTH_ROLE_ADMIN = 'Admin'
+AUTH_ROLE_ADMIN = 'Admin'
 
 # Uncomment to setup Public role name, no authentication needed
 # AUTH_ROLE_PUBLIC = 'Public'
@@ -59,7 +59,7 @@ AUTH_TYPE = AUTH_LDAP
 AUTH_USER_REGISTRATION = True
 
 # The default user self registration role
-# AUTH_USER_REGISTRATION_ROLE = "Public"
+AUTH_USER_REGISTRATION_ROLE = "Admin"
 
 # When using OAuth Auth, uncomment to setup provider(s) info
 # Google OAuth example:
@@ -85,11 +85,13 @@ AUTH_USER_REGISTRATION = True
 AUTH_LDAP_SERVER = "ldap://ldap:389"
 AUTH_LDAP_USE_TLS = False
 AUTH_LDAP_ALLOW_SELF_SIGNED = True
-AUTH_LDAP_SEARCH = 'cn=ldap-admin,ou=RealmRoles,dc=example,dc=org'
+AUTH_LDAP_SEARCH = 'dc=example,dc=org'
 AUTH_LDAP_FIRSTNAME_FIELD = 'cn'
 AUTH_LDAP_LASTNAME_FIELD = 'sn'
 AUTH_LDAP_EMAIL_FIELD = 'mail'
 AUTH_LDAP_UID_FIELD = 'uid'
+AUTH_LDAP_BIND_USER = "cn=admin,dc=example,dc=org"
+AUTH_LDAP_BIND_PASSWORD = "admin"
 #AUTH_LDAP_TLS_CACERTFILE = '/etc/ca/ca_bundle.crt'
 
 # When using OpenID Auth, uncomment to setup OpenID providers.
