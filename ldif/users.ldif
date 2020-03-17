@@ -1,14 +1,8 @@
-dn: ou=RealmRoles,dc=example,dc=org
+dn: ou=groups,dc=example,dc=org
 changetype: add
 objectclass: top
 objectclass: organizationalUnit
-ou: RealmRoles
-
-dn: ou=FinanceRoles,dc=example,dc=org
-changetype: add
-objectclass: top
-objectclass: organizationalUnit
-ou: FinanceRoles
+ou: groups
 
 dn: uid=nbenaglia,dc=example,dc=org
 changetype: add
@@ -36,25 +30,25 @@ mail: jwick@example.org
 userPassword: {SHA}W6ph5Mm5Pz8GgiULbPgzG37mj9g=
 # userPassword has value password (SHA encoded)
 
-dn: cn=ldap-user,ou=RealmRoles,dc=example,dc=org
+dn: cn=users,ou=groups,dc=example,dc=org
 changetype: add
 objectclass: top
 objectclass: groupOfNames
-cn: ldap-user
+cn: users
 member: uid=nbenaglia,dc=example,dc=org
 member: uid=jwick,dc=example,dc=org
 
-dn: cn=ldap-admin,ou=RealmRoles,dc=example,dc=org
+dn: cn=admins,ou=groups,dc=example,dc=org
 changetype: add
 objectclass: top
 objectclass: groupOfNames
-cn: ldap-admin
+cn: admins
 member: uid=nbenaglia,dc=example,dc=org
 member: cn=admin,dc=example,dc=org
 
-dn: cn=accountant,ou=FinanceRoles,dc=example,dc=org
+dn: cn=operations,ou=groups,dc=example,dc=org
 changetype: add
 objectclass: top
 objectclass: groupOfNames
-cn: accountant
+cn: operations
 member: uid=jwick,dc=example,dc=org

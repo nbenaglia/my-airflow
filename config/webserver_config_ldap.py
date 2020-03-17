@@ -86,6 +86,7 @@ AUTH_LDAP_SERVER = "ldap://ldap:389"
 AUTH_LDAP_USE_TLS = False
 AUTH_LDAP_ALLOW_SELF_SIGNED = True
 AUTH_LDAP_SEARCH = 'dc=example,dc=org'
+#AUTH_LDAP_SEARCH_FILTER = '(objectclass=groupOfNames)(cn=admins)'
 AUTH_LDAP_FIRSTNAME_FIELD = 'cn'
 AUTH_LDAP_LASTNAME_FIELD = 'sn'
 AUTH_LDAP_EMAIL_FIELD = 'mail'
