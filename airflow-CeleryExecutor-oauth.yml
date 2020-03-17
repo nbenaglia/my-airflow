@@ -1,0 +1,120 @@
+version: '2.1'
+services:
+    redis:
+        image: 'redis:5.0.5'
+        command: redis-server --requirepass redispass
+
+    postgres:
+        image: postgres:9.6
+        environment:
+            - POSTGRES_USER=airflow
+            - POSTGRES_PASSWORD=airflow
+            - POSTGRES_DB=airflow
+            - PGDATA=/var/lib/postgresql/data/pgdata
+        volumes:
+            - ./pgdata:/var/lib/postgresql/data/pgdata
+
+    keycloak:
+        image: jboss/keycloak:9.0.0
+        depends_on:
+            - postgres
+        links:
+            - postgres:postgres
+        environment:
+            KEYCLOAK_USER: "admin" 
+            KEYCLOAK_PASSWORD: "admin"
+            DB_VENDOR: "postgres"
+            DB_DATABASE: "keycloak"
+            DB_USER: "airflow"
+            DB_PASSWORD: "airflow"
+            DB_ADDR: "keycloak:5432"
+        ports:
+            - "9090:8080"
+        # volumes:
+        #     - ./oauth/import-realm.json:/opt/jboss/keycloak
+
+
+    webserver:
+        image: airflow:1.10.9
+        restart: always
+        depends_on:
+            - postgres
+            - redis
+        links:
+            - postgres:postgres
+            - keycloak:keycloak
+        environment:
+            - LOAD_EX=n
+            - FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
+            - EXECUTOR=Celery
+            - POSTGRES_USER=airflow
+            - POSTGRES_PASSWORD=airflow
+            - POSTGRES_DB=airflow
+            - REDIS_PASSWORD=redispass
+        volumes:
+            - $GITHUB_HOME/airflow/airflow/example_dags:/usr/local/airflow/dags
+            - ./plugins:/usr/local/airflow/plugins
+            - ./config/airflow.cfg:/usr/local/airflow/airflow.cfg
+            - ./config/init.sh:/usr/local/airflow/init.sh
+            - ./config/webserver_config_oauth.py:/usr/local/airflow/webserver_config.py
+        ports:
+            - "8080:8080"
+        command: webserver
+        healthcheck:
+            test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
+            interval: 30s
+            timeout: 30s
+            retries: 3
+
+    flower:
+        image: airflow:1.10.9
+        restart: always
+        depends_on:
+            - redis
+        environment:
+            - EXECUTOR=Celery
+            - REDIS_PASSWORD=redispass
+        ports:
+            - "5555:5555"
+        command: flower
+
+    scheduler:
+        image: airflow:1.10.9
+        restart: always
+        depends_on:
+            - webserver
+        links:
+            - postgres:postgres
+        volumes:
+            - $GITHUB_HOME/airflow/airflow/example_dags:/usr/local/airflow/dags
+            - ./plugins:/usr/local/airflow/plugins
+        environment:
+            - LOAD_EX=n
+            - FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
+            - EXECUTOR=Celery
+            - POSTGRES_USER=airflow
+            - POSTGRES_PASSWORD=airflow
+            - POSTGRES_DB=airflow
+            - REDIS_PASSWORD=redispass
+            - ./config/airflow.cfg:/usr/local/airflow/airflow.cfg
+        command: scheduler
+
+    worker:
+        image: airflow:1.10.9
+        restart: always
+        depends_on:
+            - scheduler
+        links:
+            - postgres:postgres
+        volumes:
+            - $GITHUB_HOME/airflow/airflow/example_dags:/usr/local/airflow/dags
+            - ./plugins:/usr/local/airflow/plugins
+        environment:
+            - FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
+            - EXECUTOR=Celery
+            - POSTGRES_USER=airflow
+            - POSTGRES_PASSWORD=airflow
+            - POSTGRES_DB=airflow
+            - REDIS_PASSWORD=redispass
+            - ./config/airflow.cfg:/usr/local/airflow/airflow.cfg
+        command: worker

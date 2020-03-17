@@ -25,7 +25,7 @@ Image [osixia/openldap](https://github.com/osixia/docker-openldap) is going to b
 
 2. Populate LDAP with some data from your localhost (connecting to docker opened port, 3890):
 
-  `ldapadd -Z -H ldap://localhost:3890 -D "cn=admin,dc=example,dc=org" -w admin -f ./ldif/users.ldif`
+  `ldapadd -Z -H ldap://localhost:3890 -D "cn=admin,dc=example,dc=org" -w admin -f ./data/ldif/users.ldif`
 
   Test with:
   
