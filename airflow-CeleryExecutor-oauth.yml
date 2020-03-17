@@ -16,18 +16,9 @@ services:
 
     keycloak:
         image: jboss/keycloak:9.0.0
-        depends_on:
-            - postgres
-        links:
-            - postgres:postgres
         environment:
-            KEYCLOAK_USER: "admin" 
-            KEYCLOAK_PASSWORD: "admin"
-            DB_VENDOR: "postgres"
-            DB_DATABASE: "keycloak"
-            DB_USER: "airflow"
-            DB_PASSWORD: "airflow"
-            DB_ADDR: "keycloak:5432"
+            - KEYCLOAK_USER=admin
+            - KEYCLOAK_PASSWORD=admin
         ports:
             - "9090:8080"
         # volumes:
