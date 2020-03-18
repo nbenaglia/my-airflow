@@ -14,17 +14,31 @@ services:
         volumes:
             - ./pgdata:/var/lib/postgresql/data/pgdata
 
-    keycloak:
+    import-keycloak:
         image: jboss/keycloak:9.0.0
         environment:
             - KEYCLOAK_USER=admin
-            - KEYCLOAK_PASSWORD=admin
+            - KEYCLOAK_PASSWORD=admin                
+        command: >
+            /opt/jboss/keycloak/bin/standalone.sh \
+            -Djboss.socket.binding.port-offset=100 \
+            -Dkeycloak.migration.action=import \
+            -Dkeycloak.profile.feature.upload_scripts=enabled \
+            -Dkeycloak.migration.provider=singleFile \
+            -Dkeycloak.migration.file=/tmp/import_realm.json    
+        volumes:
+            - ./oauth/import-realm.json:/tmp/import-realm.json
+
+    keycloak:
+        image: jboss/keycloak:9.0.0
+        depends_on:
+            - import-keycloak
+        environment:
+            - KEYCLOAK_USER=admin
+            - KEYCLOAK_PASSWORD=admin                
         ports:
             - "9090:8080"
-        # volumes:
-        #     - ./oauth/import-realm.json:/opt/jboss/keycloak
-
-
+       
     webserver:
         image: airflow:1.10.9
         restart: always
