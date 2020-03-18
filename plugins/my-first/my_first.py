@@ -51,13 +51,22 @@ v_appbuilder_package = {"name": "Test View",
 # Creating a flask appbuilder Menu Item
 appbuilder_mitem = {"name": "Google",
                     "category": "Search",
-                    "category_icon": "fa-th",
+                    "category_icon": "fa-search",
                     "href": "https://www.google.com"}
+
+appbuilder_mitem2 = {"name": "Stackoverflow",
+                    "category": "Search",
+                    "category_icon": "fa-search",
+                    "href": "https://www.stackoverflow.com"}
+
+appbuilder_mitem3 = {"name": "Lichess",
+                    "category": "Search",
+                    "category_icon": "fa-search",
+                    "href": "https://www.lichess.org"}
 
 # A global operator extra link that redirect you to google
 class GoogleLink(BaseOperatorLink):
     name = "Google"
-
     def get_link(self, operator, dttm):
         return "https://www.google.com"
 
@@ -71,6 +80,6 @@ class AirflowTestPlugin(AirflowPlugin):
     admin_views = []
     flask_blueprints = [bp]
     appbuilder_views = [v_appbuilder_package]
-    appbuilder_menu_items = [appbuilder_mitem]
-    global_operator_extra_links = [GoogleLink(),]
+    appbuilder_menu_items = [appbuilder_mitem, appbuilder_mitem2, appbuilder_mitem3]
+    global_operator_extra_links = [GoogleLink()]
     operator_extra_links = []
