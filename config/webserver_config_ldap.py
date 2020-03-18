@@ -61,32 +61,12 @@ AUTH_USER_REGISTRATION = True
 # The default user self registration role
 AUTH_USER_REGISTRATION_ROLE = "Admin"
 
-# When using OAuth Auth, uncomment to setup provider(s) info
-# Google OAuth example:
-# OAUTH_PROVIDERS = [{
-# 	'name':'google',
-#     'whitelist': ['@YOU_COMPANY_DOMAIN'],  # optional
-#     'token_key':'access_token',
-#     'icon':'fa-google',
-#         'remote_app': {
-#             'base_url':'https://www.googleapis.com/oauth2/v2/',
-#             'request_token_params':{
-#                 'scope': 'email profile'
-#             },
-#             'access_token_url':'https://accounts.google.com/o/oauth2/token',
-#             'authorize_url':'https://accounts.google.com/o/oauth2/auth',
-#             'request_token_url': None,
-#             'consumer_key': CONSUMER_KEY,
-#             'consumer_secret': SECRET_KEY,
-#         }
-# }]
-
 # When using LDAP Auth, setup the ldap server
 AUTH_LDAP_SERVER = "ldap://ldap:389"
 AUTH_LDAP_USE_TLS = False
 AUTH_LDAP_ALLOW_SELF_SIGNED = True
 AUTH_LDAP_SEARCH = 'dc=example,dc=org'
-#AUTH_LDAP_SEARCH_FILTER = '(objectclass=groupOfNames)(cn=admins)'
+# AUTH_LDAP_SEARCH_FILTER = '(memberOf=cn=admins,ou=groups,dc=example,dc=org)'   # it appends the uid of the logging user and the query doesn't work.
 AUTH_LDAP_FIRSTNAME_FIELD = 'cn'
 AUTH_LDAP_LASTNAME_FIELD = 'sn'
 AUTH_LDAP_EMAIL_FIELD = 'mail'
@@ -94,11 +74,3 @@ AUTH_LDAP_UID_FIELD = 'uid'
 AUTH_LDAP_BIND_USER = "cn=admin,dc=example,dc=org"
 AUTH_LDAP_BIND_PASSWORD = "admin"
 #AUTH_LDAP_TLS_CACERTFILE = '/etc/ca/ca_bundle.crt'
-
-# When using OpenID Auth, uncomment to setup OpenID providers.
-# example for OpenID authentication
-# OPENID_PROVIDERS = [
-#    { 'name': 'Yahoo', 'url': 'https://me.yahoo.com' },
-#    { 'name': 'AOL', 'url': 'http://openid.aol.com/<username>' },
-#    { 'name': 'Flickr', 'url': 'http://www.flickr.com/<username>' },
-#    { 'name': 'MyOpenID', 'url': 'https://www.myopenid.com' }]

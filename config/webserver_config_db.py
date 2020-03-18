@@ -60,34 +60,3 @@ AUTH_TYPE = AUTH_DB
 
 # The default user self registration role
 # AUTH_USER_REGISTRATION_ROLE = "Public"
-
-# When using OAuth Auth, uncomment to setup provider(s) info
-# Google OAuth example:
-# OAUTH_PROVIDERS = [{
-# 	'name':'google',
-#     'whitelist': ['@YOU_COMPANY_DOMAIN'],  # optional
-#     'token_key':'access_token',
-#     'icon':'fa-google',
-#         'remote_app': {
-#             'base_url':'https://www.googleapis.com/oauth2/v2/',
-#             'request_token_params':{
-#                 'scope': 'email profile'
-#             },
-#             'access_token_url':'https://accounts.google.com/o/oauth2/token',
-#             'authorize_url':'https://accounts.google.com/o/oauth2/auth',
-#             'request_token_url': None,
-#             'consumer_key': CONSUMER_KEY,
-#             'consumer_secret': SECRET_KEY,
-#         }
-# }]
-
-# When using LDAP Auth, setup the ldap server
-# AUTH_LDAP_SERVER = "ldap://ldapserver.new"
-
-# When using OpenID Auth, uncomment to setup OpenID providers.
-# example for OpenID authentication
-# OPENID_PROVIDERS = [
-#    { 'name': 'Yahoo', 'url': 'https://me.yahoo.com' },
-#    { 'name': 'AOL', 'url': 'http://openid.aol.com/<username>' },
-#    { 'name': 'Flickr', 'url': 'http://www.flickr.com/<username>' },
-#    { 'name': 'MyOpenID', 'url': 'https://www.myopenid.com' }]

@@ -81,20 +81,6 @@ OAUTH_PROVIDERS = [{
         }
 }]
 
-# When using LDAP Auth, setup the ldap server
-# AUTH_LDAP_SERVER = "ldap://ldap:389"
-# AUTH_LDAP_USE_TLS = False
-# AUTH_LDAP_ALLOW_SELF_SIGNED = True
-# AUTH_LDAP_SEARCH = 'dc=example,dc=org'
-# AUTH_LDAP_SEARCH_FILTER = '(objectclass=groupOfNames)(cn=admins)'
-# AUTH_LDAP_FIRSTNAME_FIELD = 'cn'
-# AUTH_LDAP_LASTNAME_FIELD = 'sn'
-# AUTH_LDAP_EMAIL_FIELD = 'mail'
-# AUTH_LDAP_UID_FIELD = 'uid'
-# AUTH_LDAP_BIND_USER = "cn=admin,dc=example,dc=org"
-# AUTH_LDAP_BIND_PASSWORD = "admin"
-# AUTH_LDAP_TLS_CACERTFILE = '/etc/ca/ca_bundle.crt'
-
 # When using OpenID Auth, uncomment to setup OpenID providers.
 # example for OpenID authentication
 # OPENID_PROVIDERS = [
