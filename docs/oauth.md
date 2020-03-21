@@ -1,5 +1,7 @@
 # OAUTH
 
+Airflow docker image must have `Flask-OAuthlib` in PYTHON_DEPS.
+
 We need an OAuth server and we'll use [keycloak](https://www.keycloak.org/).
 
 I have already configured an example.org realm and we need to import into keycloak.
@@ -7,6 +9,8 @@ I have already configured an example.org realm and we need to import into keyclo
 If we use the GUI to do the import operation, we'll get this error:
 
 `ERROR [org.keycloak.services.error.KeycloakErrorHandler] (default task-3) Uncaught server error: java.lang.RuntimeException: Script upload is disabled`
+
+Because (from keycloak docs) "Ability to upload scripts through the admin console is deprecated and will be removed in a future version of Keycloak."
 
 We need to execute the following command from inside the container:
 
@@ -18,7 +22,7 @@ Import:
 -Dkeycloak.migration.action=import \
 -Dkeycloak.profile.feature.upload_scripts=enabled \
 -Dkeycloak.migration.provider=singleFile \
--Dkeycloak.migration.file=./data/oauth/import_realm.json
+-Dkeycloak.migration.file=/etc/settings/import_realm.json
 ```
 
 Export:

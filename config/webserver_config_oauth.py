@@ -62,22 +62,21 @@ AUTH_USER_REGISTRATION = True
 AUTH_USER_REGISTRATION_ROLE = "Admin"
 
 # When using OAuth Auth, uncomment to setup provider(s) info
-# Google OAuth example:
 OAUTH_PROVIDERS = [{
-	'name':'example.org',
-    'whitelist': ['@example.org'],  # optional
+	'name':'example',
+    'whitelist': ['@example'],  # optional
     'token_key':'access_token',
-    'icon':'fa-google',
+    'icon':'fa-key',
         'remote_app': {
-            'base_url':'https://keycloak/oauth2/v2/',
+            'base_url':'https://localhost:9090',
             'request_token_params':{
                 'scope': 'email profile'
             },
-            'access_token_url':'https://keycloak/o/oauth2/token',
-            'authorize_url':'https://keycloak/o/oauth2/auth',
+            'access_token_url':'https://localhost:9090/auth/realms/example/protocol/openid-connect/token',
+            'authorize_url':'https://localhost:9090/auth/realms/example',
             'request_token_url': None,
-            'consumer_key': CONSUMER_KEY,
-            'consumer_secret': SECRET_KEY,
+            'consumer_key': "airflow",
+            'consumer_secret': "387baaa8-24b5-42e9-87a9-7e0de8b1c942"
         }
 }]
 

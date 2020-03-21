@@ -15,7 +15,7 @@ ENV TERM linux
 ARG AIRFLOW_VERSION=1.10.9
 ARG AIRFLOW_USER_HOME=/usr/local/airflow
 ARG AIRFLOW_DEPS=""
-ARG PYTHON_DEPS="pytz pyOpenSSL ndg-httpsclient pyasn1 python-ldap psycopg2-binary boto3"
+ARG PYTHON_DEPS="pytz pyOpenSSL ndg-httpsclient pyasn1 python-ldap psycopg2-binary boto3 Flask-OAuthlib"
 ENV AIRFLOW_HOME=${AIRFLOW_USER_HOME}
 
 # Define en_US.
