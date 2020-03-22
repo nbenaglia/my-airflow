@@ -30,11 +30,14 @@ services:
             - DB_PORT=5432
             - DB_USER=airflow
             - DB_PASSWORD=airflow
-            - KEYCLOAK_IMPORT=/etc/settings/import_realm.json
+            - KEYCLOAK_LOGLEVEL=debug
+            - ROOT_LOGLEVEL=debug
         ports:
             - "9090:8080"
+            - "8443:8443"
         volumes:
             - ./data/oauth/import_realm.json:/etc/settings/import_realm.json
+            - ./data/oauth/tls:/etc/x509/https
        
     webserver:
         image: airflow:1.10.9

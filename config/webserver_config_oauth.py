@@ -68,13 +68,13 @@ OAUTH_PROVIDERS = [{
     'token_key':'access_token',
     'icon':'fa-key',
         'remote_app': {
-            'base_url':'https://localhost:9090',
+            'base_url':'http://keycloak:9090',
             'request_token_params':{
                 'scope': 'email profile'
             },
-            'access_token_url':'https://localhost:9090/auth/realms/example/protocol/openid-connect/token',
-            'authorize_url':'https://localhost:9090/auth/realms/example',
-            'request_token_url': None,
+            'access_token_url':'http://keycloak:9090/auth/realms/example/protocol/openid-connect/token',
+            'authorize_url':'http://keycloak:9090/auth/realms/example/protocol/openid-connect/auth',
+            'request_token_url': 'http://keycloak:9090/auth/realms/example/protocol/openid-connect/token',
             'consumer_key': "airflow",
             'consumer_secret': "387baaa8-24b5-42e9-87a9-7e0de8b1c942"
         }
@@ -82,8 +82,9 @@ OAUTH_PROVIDERS = [{
 
 # When using OpenID Auth, uncomment to setup OpenID providers.
 # example for OpenID authentication
-# OPENID_PROVIDERS = [
-#    { 'name': 'Yahoo', 'url': 'https://me.yahoo.com' },
-#    { 'name': 'AOL', 'url': 'http://openid.aol.com/<username>' },
-#    { 'name': 'Flickr', 'url': 'http://www.flickr.com/<username>' },
-#    { 'name': 'MyOpenID', 'url': 'https://www.myopenid.com' }]
+OPENID_PROVIDERS = [
+   { 'name': 'Yahoo', 'url': 'https://me.yahoo.com' },
+   { 'name': 'AOL', 'url': 'http://openid.aol.com/<username>' },
+   { 'name': 'Flickr', 'url': 'http://www.flickr.com/<username>' },
+   { 'name': 'MyOpenID', 'url': 'https://www.myopenid.com' },
+   { 'name': 'keycloak', 'url': 'http://keycloak:9090/auth/realms/example' }]

@@ -40,3 +40,9 @@ Export:
 Airflow client in keycloak:
 
 `airflow` with secret `387baaa8-24b5-42e9-87a9-7e0de8b1c942`
+
+## TLS
+
+openssl req \
+       -newkey rsa:2048 -nodes -keyout tls.key \
+       -x509 -days 365 -out tls.crt
