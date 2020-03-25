@@ -25,8 +25,8 @@ from flask import url_for, redirect, request
 
 from flask_oauthlib.client import OAuth
 
-from airflow import models, configuration, settings
-from airflow.configuration import AirflowConfigException
+from airflow import models, settings
+from airflow.configuration import AirflowConfigException, conf
 
 import os
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
@@ -34,7 +34,7 @@ os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 _log = logging.getLogger(__name__)
 
 def get_config_param(param):
-    return str(configuration.get('keycloak', param))
+    return str(conf.get('keycloak', param))
 
 class KeyCloakUser(models.User):
 

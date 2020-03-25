@@ -56,12 +56,15 @@ services:
             - POSTGRES_PASSWORD=airflow
             - POSTGRES_DB=airflow
             - REDIS_PASSWORD=redispass
+            - AIRFLOW__WEBSERVER__AUTHENTICATE=True
+            - AIRFLOW__WEBSERVER__AUTH_BACKEND=airflow.contrib.auth.backends.keycloak_auth
         volumes:
             - $GITHUB_HOME/airflow/airflow/example_dags:/usr/local/airflow/dags
             - ./plugins:/usr/local/airflow/plugins
             - ./config/airflow.cfg:/usr/local/airflow/airflow.cfg
             - ./config/init.sh:/usr/local/airflow/init.sh
-            - ./config/webserver_config_oauth.py:/usr/local/airflow/webserver_config.py
+            #- ./config/webserver_config_oauth.py:/usr/local/airflow/webserver_config.py
+            - ./config/backend/keycloak_auth.py:/usr/local/lib/python3.7/site-packages/airflow/contrib/auth/backends/keycloak_auth.py
         ports:
             - "8080:8080"
         command: webserver
