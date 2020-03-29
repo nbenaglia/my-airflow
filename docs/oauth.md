@@ -32,7 +32,7 @@ Export:
 -Djboss.socket.binding.port-offset=100 \
 -Dkeycloak.migration.action=export \
 -Dkeycloak.migration.provider=singleFile \
--Dkeycloak.migration.realmName=example.org \
+-Dkeycloak.migration.realmName=example \
 -Dkeycloak.migration.usersExportStrategy=REALM_FILE \
 -Dkeycloak.migration.file=/tmp/import_realm.json
 ```
