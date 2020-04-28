@@ -15,6 +15,8 @@ Image [osixia/openldap](https://github.com/osixia/docker-openldap) is going to b
   `ldapsearch -x -H ldap://localhost:3890 -b dc=example,dc=org -D "cn=admin,dc=example,dc=org" -w admin -s sub "(objectclass=*)"`
   `ldapsearch -x -H ldap://localhost:3890 -b dc=example,dc=org -D "cn=admin,dc=example,dc=org" -w admin -s sub "(&(objectclass=groupOfNames)(cn=admins))"`
 
+3. Connect to http://localhost:8080 with credentials `nbenaglia` / `password`
+
 ## References
 
 - [enable memberOf](https://www.adimian.com/blog/2014/10/how-to-enable-memberof-using-openldap)

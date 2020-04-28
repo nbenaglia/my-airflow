@@ -60,7 +60,7 @@ services:
             #- AIRFLOW__WEBSERVER__AUTHENTICATE=True
             #- AIRFLOW__WEBSERVER__AUTH_BACKEND=airflow.contrib.auth.backends.keycloak_auth
         volumes:
-            - $GITHUB_HOME/airflow/airflow/example_dags:/usr/local/airflow/dags
+            #- $GITHUB_HOME/airflow/airflow/example_dags:/usr/local/airflow/dags
             - ./plugins:/usr/local/airflow/plugins
             - ./config/airflow.cfg:/usr/local/airflow/airflow.cfg
             - ./config/webserver_config_oauth.py:/usr/local/airflow/webserver_config.py
